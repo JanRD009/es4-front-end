@@ -1,6 +1,4 @@
-// src/App.js
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import React, { useState, useEffect } from 'react';
 import Formulario from './componentes/Formulario';
 import Lista from './componentes/Lista';
@@ -39,7 +37,8 @@ const App = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" style={{ backgroundColor: 'greenyellow', padding: '20px' }}>
+      {/* Agregamos un estilo inline para el color de fondo */}
       <h1 className="mb-4">Aplicación CRUD con React y LocalStorage</h1>
       <Formulario onSave={guardarItem} item={editando ? items[itemActual] : null} />
       <Lista items={items} onEdit={editarItem} onDelete={eliminarItem} />

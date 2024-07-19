@@ -9,7 +9,7 @@ const Lista = ({ items, onEdit, onDelete }) => {
         <tr>
           <th>Nombre</th>
           <th>Correo</th>
-          <th>Edad</th>
+          <th>Rut</th>
           <th>Género</th>
           <th>Fecha de Nacimiento</th>
           <th>Acciones</th>
@@ -20,7 +20,7 @@ const Lista = ({ items, onEdit, onDelete }) => {
           <tr key={index}>
             <td>{item.nombre}</td>
             <td>{item.correo}</td>
-            <td>{item.edad}</td>
+            <td>{item.rut}</td>
             <td>{item.genero}</td>
             <td>{item.fechaNacimiento}</td>
             <td>

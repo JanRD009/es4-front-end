@@ -6,7 +6,7 @@ const Formulario = ({ onSave, item }) => {
   const [formularioDatos, setFormularioDatos] = useState({
     nombre: item ? item.nombre : '',
     correo: item ? item.correo : '',
-    edad: item ? item.edad : '',
+    edad: item ? item.rut : '',
     genero: item ? item.genero : 'hombre',
     fechaNacimiento: item ? item.fechaNacimiento : '',
   });
@@ -23,7 +23,7 @@ const Formulario = ({ onSave, item }) => {
   return (
     <form onSubmit={manejarEnvio}>
       <div className="mb-3">
-        <label htmlFor="nombre" className="form-label">Nombre</label>
+        <label htmlFor="nombre" className="form-label">Nombre Completo</label>
         <input type="text" className="form-control" id="nombre" name="nombre" value={formularioDatos.nombre} onChange={manejarCambio} required />
       </div>
       <div className="mb-3">
@@ -31,8 +31,8 @@ const Formulario = ({ onSave, item }) => {
         <input type="email" className="form-control" id="correo" name="correo" value={formularioDatos.correo} onChange={manejarCambio} required />
       </div>
       <div className="mb-3">
-        <label htmlFor="edad" className="form-label">Edad</label>
-        <input type="number" className="form-control" id="edad" name="edad" value={formularioDatos.edad} onChange={manejarCambio} required />
+        <label htmlFor="rut" className="form-label">Rut</label>
+        <input type="text" className="form-control" id="rut" name="rut" value={formularioDatos.rut} onChange={manejarCambio} maxLength={10} required />
       </div>
       <div className="mb-3">
         <label className="form-label">Género</label>
