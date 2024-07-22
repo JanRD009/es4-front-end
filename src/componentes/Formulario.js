@@ -1,23 +1,63 @@
-// src/componentes/Formulario.js
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Formulario = ({ onSave, item }) => {
   const [formularioDatos, setFormularioDatos] = useState({
     nombre: item ? item.nombre : '',
-    correo: item ? item.correo : '',
-    edad: item ? item.rut : '',
+    edad: item ? item.edad : '',
+    posicion: item ? item.posicion : '',
+    dorsal: item ? item.dorsal : '',
+    estatura: item ? item.estatura : '',
+    equipo: item ? item.equipo : '',
+    fechaIngreso: item ? item.fechaIngreso : '',
     genero: item ? item.genero : 'hombre',
-    fechaNacimiento: item ? item.fechaNacimiento : '',
   });
 
+  useEffect(() => {
+    if (item) {
+      setFormularioDatos({
+        nombre: item.nombre,
+        edad: item.edad,
+        posicion: item.posicion,
+        dorsal: item.dorsal,
+        estatura: item.estatura,
+        equipo: item.equipo,
+        fechaIngreso: item.fechaIngreso,
+        genero: item.genero
+      });
+    } else {
+      setFormularioDatos({
+        nombre: '',
+        edad: '',
+        posicion: '',
+        dorsal: '',
+        estatura: '',
+        equipo: '',
+        fechaIngreso: '',
+        genero: 'hombre'
+      });
+    }
+  }, [item]);
+
   const manejarCambio = (e) => {
-    setFormularioDatos({ ...formularioDatos, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    console.log('Campo cambiado:', name, 'Valor:', value); // Depuración
+    setFormularioDatos({ ...formularioDatos, [name]: value });
   };
 
   const manejarEnvio = (e) => {
     e.preventDefault();
+    console.log('Datos enviados:', formularioDatos); // Depuración
     onSave(formularioDatos);
+    setFormularioDatos({
+      nombre: '',
+      edad: '',
+      posicion: '',
+      dorsal: '',
+      estatura: '',
+      equipo: '',
+      fechaIngreso: '',
+      genero: 'hombre'
+    });
   };
 
   return (
@@ -27,12 +67,35 @@ const Formulario = ({ onSave, item }) => {
         <input type="text" className="form-control" id="nombre" name="nombre" value={formularioDatos.nombre} onChange={manejarCambio} required />
       </div>
       <div className="mb-3">
-        <label htmlFor="correo" className="form-label">Correo</label>
-        <input type="email" className="form-control" id="correo" name="correo" value={formularioDatos.correo} onChange={manejarCambio} required />
+        <label htmlFor="edad" className="form-label">Edad</label>
+        <input type="number" className="form-control" id="edad" name="edad" value={formularioDatos.edad} onChange={manejarCambio} required />
       </div>
       <div className="mb-3">
-        <label htmlFor="rut" className="form-label">Rut</label>
-        <input type="text" className="form-control" id="rut" name="rut" value={formularioDatos.rut} onChange={manejarCambio} maxLength={10} required />
+        <label htmlFor="posicion" className="form-label">Posición</label>
+        <select className="form-control" id="posicion" name="posicion" value={formularioDatos.posicion} onChange={manejarCambio} required>
+          <option value="">Seleccione una posición</option>
+          <option value="Base">Base</option>
+          <option value="Escolta">Escolta</option>
+          <option value="Alero">Alero</option>
+          <option value="Ala-Pívot">Ala-Pívot</option>
+          <option value="Pívot">Pívot</option>
+        </select>
+      </div>
+      <div className="mb-3">
+        <label htmlFor="dorsal" className="form-label">Dorsal</label>
+        <input type="number" className="form-control" id="dorsal" name="dorsal" value={formularioDatos.dorsal} onChange={manejarCambio} required />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="estatura" className="form-label">Estatura (cm)</label>
+        <input type="number" className="form-control" id="estatura" name="estatura" value={formularioDatos.estatura} onChange={manejarCambio} required />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="equipo" className="form-label">Equipo</label>
+        <input type="text" className="form-control" id="equipo" name="equipo" value={formularioDatos.equipo} onChange={manejarCambio} required />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="fechaIngreso" className="form-label">Fecha de Ingreso</label>
+        <input type="date" className="form-control" id="fechaIngreso" name="fechaIngreso" value={formularioDatos.fechaIngreso} onChange={manejarCambio} required />
       </div>
       <div className="mb-3">
         <label className="form-label">Género</label>
@@ -45,11 +108,7 @@ const Formulario = ({ onSave, item }) => {
           <label htmlFor="mujer" className="form-check-label">Mujer</label>
         </div>
       </div>
-      <div className="mb-3">
-        <label htmlFor="fechaNacimiento" className="form-label">Fecha de Nacimiento</label>
-        <input type="date" className="form-control" id="fechaNacimiento" name="fechaNacimiento" value={formularioDatos.fechaNacimiento} onChange={manejarCambio} required />
-      </div>
-      <button type="submit" className="btn btn-primary">Guardar</button>
+      <button type="submit" className="btn btn-primary">{item ? 'Guardar Actualizaciones' : 'Guardar'}</button>
     </form>
   );
 };

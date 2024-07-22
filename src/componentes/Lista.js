@@ -1,5 +1,3 @@
-// src/componentes/Lista.js
-
 import React from 'react';
 
 const Lista = ({ items, onEdit, onDelete }) => {
@@ -8,10 +6,13 @@ const Lista = ({ items, onEdit, onDelete }) => {
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>Correo</th>
-          <th>Rut</th>
+          <th>Edad</th>
+          <th>Posición</th>
+          <th>Dorsal</th>
+          <th>Estatura (cm)</th>
+          <th>Equipo</th>
+          <th>Fecha de Ingreso</th>
           <th>Género</th>
-          <th>Fecha de Nacimiento</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -19,10 +20,13 @@ const Lista = ({ items, onEdit, onDelete }) => {
         {items.map((item, index) => (
           <tr key={index}>
             <td>{item.nombre}</td>
-            <td>{item.correo}</td>
-            <td>{item.rut}</td>
+            <td>{item.edad}</td>
+            <td>{item.posicion}</td>
+            <td>{item.dorsal}</td>
+            <td>{item.estatura}</td>
+            <td>{item.equipo}</td>
+            <td>{item.fechaIngreso}</td>
             <td>{item.genero}</td>
-            <td>{item.fechaNacimiento}</td>
             <td>
               <button className="btn btn-warning me-2" onClick={() => onEdit(index)}>Editar</button>
               <button className="btn btn-danger" onClick={() => onDelete(index)}>Eliminar</button>

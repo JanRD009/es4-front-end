@@ -10,14 +10,17 @@ const App = () => {
 
   useEffect(() => {
     const itemsAlmacenados = JSON.parse(localStorage.getItem('items')) || [];
+    console.log('Items almacenados:', itemsAlmacenados);
     setItems(itemsAlmacenados);
   }, []);
 
   const guardarItem = (item) => {
+    console.log('Item a guardar:', item);
     let nuevosItems;
     if (editando) {
       nuevosItems = items.map((it, index) => (index === itemActual ? item : it));
       setEditando(false);
+      setItemActual(null);
     } else {
       nuevosItems = [...items, item];
     }
@@ -38,8 +41,7 @@ const App = () => {
 
   return (
     <div className="container mt-5" style={{ backgroundColor: 'greenyellow', padding: '20px' }}>
-      {/* Agregamos un estilo inline para el color de fondo */}
-      <h1 className="mb-4">Aplicación CRUD con React y LocalStorage</h1>
+      <h1 className="mb-4">Agregar un Jugador/a de Baloncesto.</h1>
       <Formulario onSave={guardarItem} item={editando ? items[itemActual] : null} />
       <Lista items={items} onEdit={editarItem} onDelete={eliminarItem} />
     </div>
